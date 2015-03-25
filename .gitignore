@@ -1,0 +1,4 @@
+*.o
+hciattach
+hciconfig
+hcitool
