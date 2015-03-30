@@ -332,6 +332,11 @@ static int bcm43xx(int fd, struct uart_t *u, struct termios *ti)
 	return bcm43xx_init(fd, u->init_speed, u->speed, ti, u->bdaddr);
 }
 
+static int realtek(int fd, struct uart_t *u, struct termios *ti)
+{
+	return rtk_init(fd, u->speed, u->bdaddr, ti);
+}
+
 static int read_check(int fd, void *buf, int count)
 {
 	int res;
@@ -1162,6 +1167,10 @@ struct uart_t uart[] = {
 	/* AMP controller UART */
 	{ "amp",	0x0000, 0x0000, HCI_UART_H4, 115200, 115200,
 			AMP_DEV, DISABLE_PM, NULL, NULL, NULL },
+
+	/* Realtek controller UART H5 */
+	{ "rtk_h5",	0x0000, 0x0000, HCI_UART_3WIRE, 115200, 115200,
+			0, DISABLE_PM, NULL, realtek, NULL },
 
 	{ NULL, 0 }
 };

@@ -15,7 +15,8 @@ hciattach-objs = \
 	hciattach_qualcomm.o \
 	hciattach_st.o \
 	hciattach_ti.o \
-	hciattach_tialt.o
+	hciattach_tialt.o \
+	hciattach_rtk.o
 
 hciconfig-objs = \
 	hciconfig.o \
