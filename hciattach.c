@@ -334,7 +334,12 @@ static int bcm43xx(int fd, struct uart_t *u, struct termios *ti)
 
 static int realtek(int fd, struct uart_t *u, struct termios *ti)
 {
-	return rtk_init(fd, u->speed, u->bdaddr, ti);
+	return rtk_init(fd, &u->speed, ti);
+}
+
+static int realtek2(int fd, struct uart_t *u, struct termios *ti)
+{
+	return rtk_post(fd, ti);
 }
 
 static int read_check(int fd, void *buf, int count)
@@ -1170,7 +1175,7 @@ struct uart_t uart[] = {
 
 	/* Realtek controller UART H5 */
 	{ "rtk_h5",	0x0000, 0x0000, HCI_UART_3WIRE, 115200, 115200,
-			0, DISABLE_PM, NULL, realtek, NULL },
+			0, DISABLE_PM, NULL, realtek, realtek2 },
 
 	{ NULL, 0 }
 };
