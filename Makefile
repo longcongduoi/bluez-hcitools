@@ -2,6 +2,8 @@
 #
 #
 
+FIRMWARE_DIR = /lib/firmware/rtl_bt
+
 lib = \
 	lib/bluetooth.o \
 	lib/hci.o \
@@ -46,6 +48,9 @@ clean:
 	-rm -f $(lib)
 
 install: hciattach hciconfig hcitool
-	install -m 755 hciattach $(DESTDIR)/sbin/hciattach
-	install -m 755 hciconfig $(DESTDIR)/sbin/hciconfig
-	install -m 755 hcitool $(DESTDIR)/bin/hcitool
+	install -m 755 hciattach $(DESTDIR)/usr/sbin/hciattach
+	install -m 755 hciconfig $(DESTDIR)/usr/sbin/hciconfig
+	install -m 755 hcitool $(DESTDIR)/usr/bin/hcitool
+	mkdir -p $(DESTDIR)$(FIRMWARE_DIR) && \
+		install -m 644 rtl8723b_fw.bin $(DESTDIR)$(FIRMWARE_DIR)
+
